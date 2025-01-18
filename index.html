@@ -230,11 +230,8 @@
             const shouldGrow = Math.random() > 0.5;
             svg.classList.add(shouldGrow ? 'growing' : 'instant');
             
-            // Add base animation delays
-            const baseDelay = i * 0.2;
-            svg.style.animationDelay = shouldGrow ? 
-                `${baseDelay}s, ${baseDelay + 3}s` : 
-                `${baseDelay}s, ${baseDelay + 2}s`;
+            // All flowers start growing at the same time
+            svg.style.animationDelay = '0s, 3s';
             
             // Randomly adjust height
             if (i % 3 === 0) {
