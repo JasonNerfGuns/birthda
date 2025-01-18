@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+        
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff7e6;
+            overflow: hidden;
+        }
+
+        .message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5em;
+            color: #ff69b4;
+            text-align: center;
+            margin-bottom: 1em;
+            z-index: 2;
+        }
+
+        .hearts-container {
+            display: flex;
+            gap: 2em;
+            margin-bottom: 2em;
+            z-index: 2;
+        }
+
+        .heart {
+            width: 50px;
+            height: 50px;
+            background-color: #ff69b4;
+            position: relative;
+            transform: rotate(-45deg);
+            animation: pulse 1.5s ease infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.7));
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            background-color: #ff69b4;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart::before {
+            top: -25px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: 25px;
+        }
+
+        @keyframes pulse {
+            0% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.2); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+
+        .heart:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .heart:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .tulip-container {
+            position: relative;
+            height: 400px;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-end;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            perspective: 1000px;
+        }
+
+        .tulip {
+            position: relative;
+            width: 80px;
+            height: 240px;
+            margin: -20px 5px;
+            transform-origin: bottom center;
+        }
+
+        .tulip.growing {
+            animation: liftAndGrow 3s ease-out forwards, sway 3s ease-in-out infinite;
+        }
+
+        .tulip.instant {
+            animation: liftFromSide 2s ease-out forwards, sway 3s ease-in-out infinite;
+        }
+
+        .tulip:nth-child(3n) {
+            height: 220px;
+        }
+
+        .tulip:nth-child(2n) {
+            height: 200px;
+        }
+
+        .tulip:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes liftFromSide {
+            0% { 
+                transform: rotate(-90deg);
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+            }
+            100% { 
+                transform: rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes liftAndGrow {
+            0% { 
+                transform: rotate(-90deg) scale(0.1);
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+                transform: rotate(-45deg) scale(0.3);
+            }
+            60% {
+                transform: rotate(-20deg) scale(0.6);
+            }
+            100% { 
+                transform: rotate(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes sway {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: #ffb6c1;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 10s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        Happy Birthday Mom!<br>
+        I Love You
+    </div>
+    
+    <div class="hearts-container">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+
+    <div class="tulip-container">
+        <svg class="tulip" viewBox="0 0 100 300">
+            <!-- Stem -->
+            <path d="M50 300 Q 45 200 50 100" 
+                  stroke="#50C878" 
+                  stroke-width="4" 
+                  fill="none"/>
+            
+            <!-- Leaves -->
+            <path d="M50 200 C 70 190, 90 180, 95 200 C 90 220, 70 210, 50 200" 
+                  stroke="#50C878" 
+                  stroke-width="2" 
+                  fill="#90EE90"/>
+            <path d="M50 150 C 30 140, 10 130, 5 150 C 10 170, 30 160, 50 150" 
+                  stroke="#50C878" 
+                  stroke-width="2" 
+                  fill="#90EE90"/>
+            
+            <!-- Flower -->
+            <g transform="translate(50,100) scale(0.8)">
+                <path d="M-30 0 C-20 -20, 20 -20, 30 0 C 20 20, -20 20, -30 0" 
+                      fill="#ff69b4"/>
+                <path d="M-25 -5 C-15 -25, 15 -25, 25 -5 C 15 15, -15 15, -25 -5" 
+                      fill="#ff1493"/>
+                <path d="M-20 -10 C-10 -30, 10 -30, 20 -10 C 10 10, -10 10, -20 -10" 
+                      fill="#ff69b4"/>
+            </g>
+        </svg>
+    </div>
+
+    <script>
+        // Create field of flowers
+        const container = document.querySelector('.tulip-container');
+        const template = container.innerHTML;
+        container.innerHTML = '';
+        
+        for (let i = 0; i < 15; i++) {
+            const tulip = document.createElement('div');
+            tulip.innerHTML = template;
+            const svg = tulip.querySelector('svg');
+            
+            // Randomly decide if this flower should grow gradually or appear instantly
+            const shouldGrow = Math.random() > 0.5;
+            svg.classList.add(shouldGrow ? 'growing' : 'instant');
+            
+            // Add base animation delays
+            const baseDelay = i * 0.2;
+            svg.style.animationDelay = shouldGrow ? 
+                `${baseDelay}s, ${baseDelay + 3}s` : 
+                `${baseDelay}s, ${baseDelay + 2}s`;
+            
+            // Randomly adjust height
+            if (i % 3 === 0) {
+                svg.style.height = '220px';
+            } else if (i % 2 === 0) {
+                svg.style.height = '200px';
+            }
+            
+            // Alternate flower colors
+            const petals = tulip.querySelectorAll('[fill="#ff69b4"]');
+            const centers = tulip.querySelectorAll('[fill="#ff1493"]');
+            if (i % 2 === 0) {
+                petals.forEach(petal => petal.setAttribute('fill', '#ff1493'));
+                centers.forEach(center => center.setAttribute('fill', '#ff69b4'));
+            }
+            
+            container.appendChild(svg);
+        }
+
+        // Create floating particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            document.body.appendChild(particle);
+            
+            particle.addEventListener('animationend', () => {
+                particle.remove();
+            });
+        }
+
+        setInterval(createParticle, 300);
+
+        for (let i = 0; i < 20; i++) {
+            createParticle();
+        }
+    </script>
+</body>
+</html>
